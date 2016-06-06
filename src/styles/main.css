@@ -1,0 +1,158 @@
+html, body {border: 0; height: 100%; margin: 0; padding: 0; width: 100%; font-size: 0;}
+a {text-decoration: none;}
+
+.content, aside {
+  position: relative;
+  display: inline-block;
+  transition: all .2s;
+  background: rgb(240,240,240);
+}
+
+aside {
+  box-shadow: inset 0px 0px .3px .3px rgba(80,80,80,.4);
+  top: 40px; width: 0%;
+  height: calc(100% - 40px);
+  background: white;
+  z-index: 2;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+aside.big {width: 20%;}
+
+.side-footer {position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;}
+.side-footer input {
+  box-sizing: border-box;
+  display: inline-block;
+  font: 12px "Roboto";
+  border: none;
+  padding: 10px;
+}
+.create-input {width: 80%;}
+.playback-input {width: 20%;}
+
+.create {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  color: rgb(80,80,80);
+}
+
+.group-side, .channel-side {box-sizing: border-box;}
+.group-side {width: 20vw; padding: 10px 15px; position: relative; transition: .2s all;}
+.gs-open {background: rgb(230,230,230); padding: 15px;}
+.channel-side {width: 100%;}
+.gs-settings {font-size: 16px; position: absolute; padding: 5px; top: 15px; right: 10px; cursor: pointer;}
+.gs-title {font: 16px "Roboto"; padding: 5px; color: #cc181e; cursor: pointer; display: inline-block;}
+.cs-title, .cs-new {display: inline-block; font: 12px "Roboto"; box-sizing: border-box; padding: 5px;}
+.cs-title {width: 80%;}
+.cs-new {width: 20%; text-align: right;}
+
+.content {
+  top: 40px;
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.content.small {width: 80%;}
+::-webkit-scrollbar {display: none;}
+::-moz-scrollbar {display: none;}
+
+.drawer.small {width: 80%; left: 20%;}
+.drawer {
+  transition: .2s all;
+  position: fixed;
+  pointer-events: none;
+  top: 40px; left: 0;
+  height: 0px; width: 100%;
+  overflow: hidden;
+  text-align: center;
+  background: black;
+}
+.drawer.open {height: calc(100% - 80px);}
+.prev, .next, #player {pointer-events: auto; cursor: pointer;}
+.prev, .next {
+  position: absolute;
+  top: calc(50% - 20px);
+  font-size: 40px !important;
+  height: 40px; width: 40px;
+  color: rgb(120,120,120);
+}
+.prev:hover, .next:hover {
+  color: rgb(180,180,180);
+}
+.prev {left: 5px;}
+.next {right: 5px;}
+
+#player {width: 100%; height: 100%;}
+
+main {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  visibility: hidden;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+  width: 100%;
+}
+main.space {
+  padding-top: calc(100vh - 40px);
+}
+
+.bg-bar {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  background: rgb(120,80,80);
+  height: 40px;
+  pointer-events: none;
+}
+.bg-bar.on {
+  top: calc(100% - 40px);
+  background: black;
+}
+
+.top, .bot {
+  position: fixed;
+  cursor: pointer;
+  bottom: 4px;
+  font-size: 30px !important;
+  color: rgb(120,120,120);
+}
+.top {right: 11px;}
+.bot {left: 11px;}
+
+main, .bg-bar {
+  transition: .2s all;
+}
+
+@media(min-width: 300px){
+  section {width: 220px;}
+  .small section, .xsmall section {width: 0px;}
+}
+@media(min-width: 500px){
+  section {width: 440px;}
+  .small section {width: 220px;}
+  .xsmall section {width: 0px;}
+}
+@media(min-width: 700px){
+  section {width: 650px;}
+  .small section {width: 440px;}
+  .xsmall section {width: 220px;}
+}
+@media(min-width: 900px){
+  section {width: 850px;}
+  .small section {width: 650px;}
+  .xsmall section {width: 440px;}
+}
+@media(min-width: 1100px){
+  section {width: 1050px;}
+  .small section {width: 850px;}
+  .xsmall section {width: 650px;}
+}
+@media(min-width: 1300px){
+  section {width: 1260px;}
+  .small section {width: 1050px;}
+  .xsmall section {width: 850px;}
+}

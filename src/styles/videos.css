@@ -1,0 +1,186 @@
+section {
+  position: relative;
+  visibility: visible;
+  transition: .2s all;
+  opacity: 1;
+  box-sizing: border-box;
+  height: 230px;
+  overflow: hidden;
+  box-shadow: 0px 0px 1px .5px rgba(40,40,40,.2);
+  padding: 10px;
+  margin: 10px auto -5px auto;
+  background: rgb(244,244,244);
+}
+section.hide {opacity: 0; height: 0px; padding: 0px; margin: 0;}
+section.expand {
+  height: auto;
+  margin: 0px auto 40px auto !important;
+  width: 100% !important;
+  text-align: center;
+  background: rgba(244,244,244,.95);
+}
+
+.group {
+  width: 75%;
+  max-width: 300px;
+  color: black;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 0;
+  font: 700 15px "Roboto";
+  height: 30px;
+  cursor: pointer;
+  text-align: left !important;
+}
+
+.settings {
+  z-index: 2;
+  font-size: 26px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: rgb(80,80,80);
+}
+.settings:hover {color: rgb(40,40,40);}
+
+.panel {
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 0; left: 0;
+  visibility: hidden;
+  transition: .2s all;
+  height: 0px; width: 100%;
+  background: rgb(220,220,220);
+}
+.panel.show {visibility: visible; height: 100%;}
+
+.refresh, .remove {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px;
+  font: 700 14px "Roboto";
+  color: rgb(80,20,40);
+}
+
+.refresh {bottom: 5px; right: 5px;}
+.remove {top: 5px; left: 5px;}
+.remove:hover, .refresh:hover {color: rgb(120,40,60);}
+
+.left, .right {
+  box-sizing: border-box;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+}
+.left {left: 0; text-align: center;}
+.right {right: 0;}
+
+.panel h2 {
+  color: rgb(60,60,60);
+  font: 700 24px "Roboto";
+  padding: 10px 20px;
+  margin: 30px 0 10px 0;
+}
+
+.panel input {
+  margin: -10px auto 10px auto;
+  border: 0;
+  text-align: center;
+}
+
+.add {cursor: pointer; margin: 0 auto;}
+.panel input, .add {
+  display: block;
+  background: rgb(248,248,248);
+  font: 14px "Roboto";
+  box-sizing: border-box;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0px 0px .3px .3px rgba(40,40,40,.5);
+}
+
+.channel {
+  position: relative;
+  display: inline-block;
+  background: rgb(248,248,248);
+  margin: 5px;
+}
+
+.cname {
+  cursor: default;
+  vertical-align: top;
+  display: inline-block;
+  padding: 10px;
+  font: 14px "Roboto";
+}
+
+.delete {
+  cursor: pointer;
+  font-size: 24px !important;
+  color: rgb(133, 25, 29);
+  padding: 5px;
+}
+
+.video {
+  text-align: left;
+  position: relative;
+  transition: .2s all;
+  vertical-align: top;
+  display: inline-block;
+  height: 170px;
+  width: 196px;
+  padding: 10px 5px 5px 5px;
+}
+.video.active {
+  background: rgb(40,40,40);
+  box-shadow: 0px 0px 1px 1px rgba(10,0,0,.8);
+}
+
+.video-del {
+  opacity: 0;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(40,40,40,.5), -1px 1px 1px rgba(40,40,40,.5), -1px -1px 1px rgba(40,40,40,.5), 1px -1px 1px rgba(40,40,40,.5);
+  font: 12px "Roboto";
+  position: absolute;
+  top: 5px; right: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.video:hover .video-del {
+  opacity: 1;
+}
+
+.video-img, .video-title, .video-links {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.video-img {
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,.5);
+  height: 110px;
+  width: 100%;
+}
+
+.video-title {
+  padding: 4px 0px 0px 0px;
+  font: 700 13px "Roboto";
+  color: #167ac6;
+  width: 100%;
+  max-height: 30px;
+  overflow: hidden;
+}
+.active .video-title {color: lightblue;}
+
+.video-links {
+  margin: 3px 0 0 0;
+  color: rgb(80,80,80);
+  font: 11px "Roboto";
+  height: 20px;
+}
+.active .video-links {color: rgb(240,240,240);}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Next Year</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://www.youtube.com/iframe_api" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <nav>
+    <i class="material-icons hamburger">menu</i>
+    <div class="logo"></div>
+    <i class="profile material-icons">account_box</i>
+  </nav>
+
+  <aside>
+    <form class="side-footer" action="javascript:addGroup()">
+      <input type="text" class="create-input" placeholder="Enter name for Group">
+      <input type="text" class="playback-input" placeholder="Rate">
+      <button type="submit" class="create">Add Group</button>
+    </form>
+  </aside>
+
+  <div class="content">
+    <div class="drawer">
+      <i class="prev material-icons">navigate_before</i>
+      <div id="player"></div>
+      <i class="next material-icons">navigate_next</i>
+    </div>
+    <div class="bg-bar"></div>
+    <main></main>
+  </div>
+  <i class="top material-icons">keyboard_arrow_up</i>
+  <i class="bot material-icons">keyboard_arrow_down</i>
+
+</body>
+</html>

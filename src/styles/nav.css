@@ -1,0 +1,38 @@
+nav {
+  transition: .2s all;
+  position: fixed;
+  z-index: 1;
+  top: 0; left: 0;
+  height: 40px; width: 100%;
+  box-shadow: 0px 0px 10px 1px rgba(40,40,40,.8);
+  box-sizing: border-box;
+  background: white;
+}
+nav.playing {
+  background: black;
+  box-shadow: 0px 0px 10px 1px black;
+}
+
+.hamburger, .logo, .profile {cursor: pointer;}
+
+.hamburger {
+  position: absolute;
+  top: 10px; left: 15px;
+  transition: .2s all;
+  color: rgb(160,160,160);
+}
+.hamburger:hover {color: rgb(80,80,80);}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  font: 16px "Roboto";
+}
+
+.profile {
+  position: absolute;
+  top: 5px; right: 10px;
+  font-size: 30px !important;
+  color: rgb(200,200,200);
+}
