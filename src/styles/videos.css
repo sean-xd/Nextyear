@@ -12,8 +12,8 @@ section {
   overflow: hidden;
 }
 section.bar {
-  height: 40px;
-  background: black;
+  height: 40px !important;
+  padding: 40px 0px 0px 0px !important;
 }
 section.hide {opacity: 0; height: 0px; padding: 0px; margin: 0;}
 section.expand {
@@ -58,6 +58,7 @@ section.expand .list {
 }
 
 .settings {
+  transition: .2s all;
   z-index: 2;
   font-size: 22px;
   position: absolute;
@@ -65,6 +66,9 @@ section.expand .list {
   right: 10px;
   cursor: pointer;
   color: rgb(200,200,200);
+}
+.flip {
+  transform: rotate(180deg);
 }
 
 .panel {

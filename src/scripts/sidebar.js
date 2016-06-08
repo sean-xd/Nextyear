@@ -2,6 +2,12 @@ kyp("tab", e => {e.preventDefault(); openSidebar();});
 
 clk(".hamburger", openSidebar);
 
+function openSidebar(){
+  clt(dom.content, "small");
+  clt(dom.aside, "big");
+  clt(dom.drawer, "small");
+}
+
 clk(dom.aside, e => {
   if(clc(e, "gs-title")) toggleDrawer(e.textContent);
   if(clc(e, "gs-settings")) gsSettings(e);

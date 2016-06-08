@@ -15,7 +15,7 @@ function channelSideDom(name){
 function sectionDom(name){
   return t("section", {id: name})([
     t("h3", {classes: ["group"]})(name),
-    t("i", {classes: ["settings", "material-icons"]})("settings"),
+    t("i", {classes: ["settings", "material-icons", "flip"]})("eject"),
     t(".panel")([
       t(".remove")("delete"),
       t(".refresh")("refresh"),

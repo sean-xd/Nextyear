@@ -1,15 +1,16 @@
-function activatePlayer(){
+function onYouTubeIframeAPIReady(){
   player = new YT.Player("player", {
     playerVars: {controls: 1, showinfo: 0, iv_load_policy: 3},
     events: {
       onStateChange: onPlayerStateChange,
-      onReady: () => {player.cuePlaylist(list[active.group]);}
+      onReady: () => {
+        player.cuePlaylist(list[active.group]);
+        if(Object.keys(groups).length) Object.keys(groups).forEach(key => load(key));
+      }
     },
     videoId: el(".video")[0] ? el(".video")[0].id : list[active.group] ? list[active.group][0] : "MhYqKg3oSQ8"
   });
 }
-
-function onYouTubeIframeAPIReady(){activatePlayer();}
 
 function onPlayerStateChange(e){
   if(e.data === 0){

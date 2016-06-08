@@ -70,6 +70,7 @@ aside.big {width: 20%;}
   background: black;
 }
 .drawer.open {height: calc(100% - 300px);}
+.drawer.bigger {height: calc(100% - 40px);}
 .prev, .next, #player {pointer-events: auto; cursor: pointer;}
 .prev, .next {
   position: absolute;
@@ -97,6 +98,10 @@ main {
 main.space {
   height: 300px;
   margin-bottom: 0px;
+}
+main.nope {
+  height: 40px !important;
+  margin-bottom: 0px !important;
 }
 
 .bg-bar {

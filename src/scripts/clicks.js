@@ -27,11 +27,18 @@ clk(dom.main, e => {
   if(clc(e, "delete")) removeChannel(e);
   if(clc(e, "video-img") || clc(e, "video-title")) toggleVideo(e);
 
-  // CHANGE THIS SHIT
   if(clc(e, "settings")){
-    if(active.theatre) toggleDrawer();
-    clt(el(".panel", pa(e))[0], "show");
+    clt(dom.drawer, "bigger");
+    clt(dom.main, "nope");
+    clt(e, "flip");
+    clt(pa(e), "bar");
   }
+
+  // CHANGE THIS SHIT
+  // if(clc(e, "settings")){
+  //   if(active.theatre) toggleDrawer();
+  //   clt(el(".panel", pa(e))[0], "show");
+  // }
 });
 
 clk(".next", nextVideo);
