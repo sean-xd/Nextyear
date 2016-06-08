@@ -1,6 +1,6 @@
 function toggleVideo(e){
   var id = pa(e).id;
-  if(!active.theatre) toggleDrawer(el("h3", pa(pa(e)))[0].textContent);
+  if(!active.theatre) toggleDrawer(el("h3", pa(pa(pa(e))))[0].textContent);
   if(active.video !== id){
     active.video = id;
     return player.loadPlaylist(list[active.group], list[active.group].indexOf(id));
@@ -36,14 +36,3 @@ clk(dom.main, e => {
 
 clk(".next", nextVideo);
 clk(".prev", previousVideo);
-
-var lastScroll = 220;
-clk(".top", () => {
-  if(lastScroll < 220) lastScroll = 220;
-  dom.content.scrollTop = lastScroll;
-  lastScroll = 220;
-});
-clk(".bot", () => {
-  lastScroll = dom.content.scrollTop || lastScroll;
-  dom.content.scrollTop = 0;
-});

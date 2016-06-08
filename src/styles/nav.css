@@ -9,7 +9,7 @@ nav {
   background: white;
 }
 nav.playing {
-  background: black;
+  background: rgb(40,40,40);
   box-shadow: 0px 0px 10px 1px black;
 }
 

@@ -6,17 +6,21 @@ function openSidebar(){
 
 function draw(name, update){
   if(!groups[name]) return;
-  if(!dom.sections[name]) dom.sections[name] = sectionDom(name);
+  if(!dom.sections[name]){
+    dom.sections[name] = sectionDom(name);
+    dom.lists[name] = el(".list", dom.sections[name])[0];
+  }
   var section = dom.sections[name],
-    children = section.children;
+    vlist = dom.lists[name],
+    children = vlist.children;
   if(update){
-    while(children.length > 3) section.removeChild(children[children.length - 1]);
+    while(children.length > 3) vlist.removeChild(children[children.length - 1]);
   }
   var playlist = groups[name].channels.reduce((arr, cn) => {
     return arr.concat(channels[cn].videos).filter(v => groups[name].banlist.indexOf(v.id) === -1);
   }, []);
   playlist.sort(sorter(e => Date.now() - e.date));
-  playlist.forEach(e => section.appendChild(videoDom(e)))
+  playlist.forEach(e => vlist.appendChild(videoDom(e)))
   list[name] = playlist.map(e => e.id);
   if(list[name].length > 100) list[name] = list[name].slice(0,99);
   if(!update){
@@ -27,6 +31,7 @@ function draw(name, update){
 }
 
 function toggleDrawer(name){
+  console.log(name);
   var close = false;
   if(!player) activatePlayer();
   if(is(name, "String")){
@@ -42,14 +47,13 @@ function toggleDrawer(name){
     clt(dom.content, "bottom");
     clt(dom.nav, "playing");
     clt(dom.main, "space");
-    clt(dom.bgbar, "on");
   }
   clt(el("#" + active.group), "expand");
   if(!active.theatre){
     active.group = false;
     active.video = false;
   }
-  else dom.content.scrollTop = 220;
+  // else dom.content.scrollTop = 300;
   active.group ? player.cuePlaylist(list[active.group]) : player.cueVideoById("mwUo_zZ6URc");
   if(active.group) player.setPlaybackRate(groups[active.group].playback);
   Object.keys(groups).forEach(key => {

@@ -25,7 +25,8 @@ function sectionDom(name){
         t(".add")("Add Channel")
       ]),
       t(".right")(groups[name].channels.map(channelDom))
-    ])
+    ]),
+    t(".list")()
   ])
 }
 
