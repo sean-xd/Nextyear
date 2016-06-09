@@ -59,7 +59,6 @@ aside.big {width: 20%;}
 ::-webkit-scrollbar {display: none;}
 ::-moz-scrollbar {display: none;}
 
-.drawer.small {width: 80%; left: 20%;}
 .drawer {
   transition: .2s all;
   position: relative;
