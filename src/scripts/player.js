@@ -13,6 +13,7 @@ function onYouTubeIframeAPIReady(){
 }
 
 function onPlayerStateChange(e){
+  console.log("state change: ", e.data);
   if(e.data === 0){
     active.video = list[active.group][list[active.group].indexOf(active.video) + 1];
   }

@@ -34,7 +34,7 @@ function sectionDom(name){
 function videoDom(data){
   return t(".video", {id: data.id})([
     t(".video-del", {click: e => {
-      var groupName = pa(pa(e.target)).id,
+      var groupName = pa(pa(pa(e.target))).id,
         id = pa(e.target).id;
       if(id === active.video) nextVideo();
       groups[groupName].banlist.push(id);
