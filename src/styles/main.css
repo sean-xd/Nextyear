@@ -1,161 +1,132 @@
+/* Reset */
 html, body {border: 0; height: 100%; margin: 0; padding: 0; width: 100%; font-size: 0;}
+::-webkit-scrollbar {display: none;}
+::-moz-scrollbar {display: none;}
 a {text-decoration: none;}
 
-.content, aside {
-  position: relative;
-  display: inline-block;
-  transition: all .2s;
-  background: rgb(240,240,240);
-}
+/* Base Styles */
+nav, aside, .group-side, .content, .drawer {transition: all .2s;}
+nav, aside, .group-side, .content, .drawer, main {position: relative;}
+.prev, .next {position: absolute;}
+aside, .create-input, .playback-input, .gs-title, .cs-title, .cs-new, .content {display: inline-block;}
+.create-input, .playback-input, .group-side, .channel-side, .cs-title, .cs-new {box-sizing: border-box;}
+.hamburger, .profile, .gs-settings, .gs-title, .prev, .next {cursor: pointer;}
+.hamburger, .profile, .prev, .next {color: rgb(200,200,200);}
+.create-input, .playback-input, .cs-title, .cs-new {font: 12px "Roboto";}
+.create, .gs-title {font: 16px "Roboto";}
 
-aside {
-  box-shadow: inset 0px 0px .3px .3px rgba(80,80,80,.4);
-  top: 40px; width: 0%;
-  height: calc(100% - 40px);
-  background: white;
-  z-index: 2;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
+/* Nav */
+nav {height: 40px;}
+nav.playing {background: rgb(40,40,40);}
+.hamburger {padding: 10px 15px;}
+.profile {float: right; font-size: 30px; padding: 5px 10px;}
+
+/* Sidebar */
+aside {height: calc(100% - 40px); overflow-y: scroll; overflow-x: hidden; width: 0%;}
 aside.big {width: 20%;}
-
-.side-footer {position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;}
-.side-footer input {
-  box-sizing: border-box;
-  display: inline-block;
-  font: 12px "Roboto";
-  border: none;
-  padding: 10px;
-}
+.side-footer {position: absolute; bottom: 0; left: 0; width: 20vw;}
+.create-input, .playback-input {border: none; padding: 10px;}
 .create-input {width: 80%;}
 .playback-input {width: 20%;}
-
-.create {
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
-  font-size: 16px;
-  color: rgb(80,80,80);
-}
-
-.group-side, .channel-side {box-sizing: border-box;}
-.group-side {width: 20vw; padding: 10px 15px; position: relative; transition: .2s all;}
+.create {padding: 10px; text-align: center;}
+.group-side {padding: 10px 15px; width: 20vw;}
 .gs-open {background: rgb(230,230,230); padding: 15px;}
-.channel-side {width: 100%;}
-.gs-settings {font-size: 16px; position: absolute; padding: 5px; top: 15px; right: 10px; cursor: pointer;}
-.gs-title {font: 16px "Roboto"; padding: 5px; color: #cc181e; cursor: pointer; display: inline-block;}
-.cs-title, .cs-new {display: inline-block; font: 12px "Roboto"; box-sizing: border-box; padding: 5px;}
+.gs-settings {float: right; font-size: 16px; padding: 5px 0px 5px 5px;}
+.gs-title {padding: 5px; color: rgb(205,25,30);}
+.cs-title, .cs-new {padding: 5px;}
 .cs-title {width: 80%;}
 .cs-new {width: 20%; text-align: right;}
 
-.content {
-  top: 40px;
-  width: 100%;
-  height: calc(100% - 40px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
+/* Content */
+.content {background: rgb(220,220,220); height: calc(100% - 40px); overflow-y: scroll; width: 100%;}
 .content.small {width: 80%;}
-::-webkit-scrollbar {display: none;}
-::-moz-scrollbar {display: none;}
-
-.drawer {
-  transition: .2s all;
-  position: relative;
-  pointer-events: none;
-  height: 0px; width: 100%;
-  overflow: hidden;
-  text-align: center;
-  background: black;
-}
-.drawer.open {height: calc(100% - 300px);}
+.drawer {height: 0px; overflow: hidden;}
+.drawer.open {height: calc(100% - 410px);}
 .drawer.bigger {height: calc(100% - 40px);}
-.prev, .next, #player {pointer-events: auto; cursor: pointer;}
-.prev, .next {
-  position: absolute;
-  top: calc(50% - 20px);
-  font-size: 40px !important;
-  height: 40px; width: 40px;
-  color: rgb(120,120,120);
-}
-.prev:hover, .next:hover {
-  color: rgb(180,180,180);
-}
+#player {width: 100%; height: 100%;}
+.prev, .next {font-size: 40px; top: calc(50% - 20px);}
 .prev {left: 5px;}
 .next {right: 5px;}
 
-#player {width: 100%; height: 100%;}
-
-main {
-  transition: .2s all;
-  position: relative;
+/* Videos */
+section {
+  background: white;
+  box-shadow: 0px 0px 1px .5px rgba(40,40,40,.2);
   box-sizing: border-box;
-  width: 100%;
+  height: 230px;
+  margin: 10px auto;
+  opacity: 1;
   overflow: hidden;
-  margin-bottom: 40px;
+  position: relative;
+  transition: .2s height;
+  width: 90%;
 }
-main.space {
-  height: 300px;
-  margin-bottom: 0px;
-}
-main.nope {
-  height: 40px !important;
-  margin-bottom: 0px !important;
-}
+section:last-child {margin: 10px auto 40px auto;}
+section.hide {height: 0px; margin: 0px; opacity: 0;}
+section.expand {height: 410px; margin: 0px; width: 100%;}
+section.bar {height: 40px;}
 
-.bg-bar {
-  position: fixed;
-  top: 40px;
-  width: 100%;
-  background: rgb(120,80,80);
-  height: 40px;
-  pointer-events: none;
-}
-.bg-bar.on {
-  top: calc(100% - 40px);
-  background: black;
-}
-
-.top, .bot {
-  position: fixed;
+.group {
+  background: rgb(40,40,40);
+  box-sizing: border-box;
+  color: rgb(200,200,200);
   cursor: pointer;
-  bottom: 4px;
-  font-size: 30px !important;
-  color: rgb(120,120,120);
+  font: 16px "Roboto";
+  font-weight: 700;
+  height: 40px;
+  padding: 10px 20px;
+  transition: .2s all;
+  width: 100%;
+  z-index: 1;
 }
-.top {right: 11px;}
-.bot {left: 11px;}
+section.expand .group {z-index: 0;}
 
-main, .bg-bar {
+.list {height: 190px; overflow-y: scroll; text-align: center; transition: .2s all;}
+section.expand .list {height: 365px; padding-top: 5px;}
+
+.close {
+  color: rgb(200,200,200);
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
   transition: .2s all;
 }
 
-@media(min-width: 300px){
-  section {width: 220px;}
-  .small section, .xsmall section {width: 0px;}
+.video {
+  display: inline-block;
+  height: 170px;
+  padding: 10px 5px 5px 5px;
+  position: relative;
+  text-align: left;
+  transition: .2s all;
+  vertical-align: top;
+  width: 196px;
 }
-@media(min-width: 500px){
-  section {width: 440px;}
-  .small section {width: 220px;}
-  .xsmall section {width: 0px;}
+.video.active {background: rgb(40,40,40);}
+.video-del {
+  color: white;
+  cursor: pointer;
+  font: 12px "Roboto";
+  opacity: 0;
+  padding: 5px;
+  position: absolute;
+  right: 5px;
+  text-shadow: 1px 1px 1px rgba(40,40,40,.5), -1px 1px 1px rgba(40,40,40,.5), -1px -1px 1px rgba(40,40,40,.5), 1px -1px 1px rgba(40,40,40,.5);
+  top: 5px;
 }
-@media(min-width: 700px){
-  section {width: 650px;}
-  .small section {width: 440px;}
-  .xsmall section {width: 220px;}
+.video:hover .video-del {opacity: 1;}
+.video-img, .video-title, .video-links {cursor: pointer; display: inline-block;}
+.video-img {box-shadow: 0px 0px 1px 1px rgba(0,0,0,.5); height: 110px; width: 100%;}
+.video-title {
+  color: rgb(20,120,200);
+  font: 700 13px "Roboto";
+  max-height: 30px;
+  overflow: hidden;
+  padding: 4px 0px 3px 0px;
+  width: 100%;
 }
-@media(min-width: 900px){
-  section {width: 850px;}
-  .small section {width: 650px;}
-  .xsmall section {width: 440px;}
-}
-@media(min-width: 1100px){
-  section {width: 1050px;}
-  .small section {width: 850px;}
-  .xsmall section {width: 650px;}
-}
-@media(min-width: 1300px){
-  section {width: 1260px;}
-  .small section {width: 1050px;}
-  .xsmall section {width: 850px;}
-}
+.active .video-title {color: lightblue;}
+.video-links {color: rgb(80,80,80); font: 12px "Roboto";}
+.active .video-links {color: rgb(200,200,200);}

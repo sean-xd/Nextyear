@@ -1,4 +1,16 @@
-kyp("tab", e => {e.preventDefault(); openSidebar();});
+function groupSideDom(name){
+  return t(".group-side")([
+    t("i", {classes: ["gs-settings", "material-icons"]})("settings"),
+    t(".gs-title")(name)
+  ].concat(groups[name].channels.map(channelSideDom)));
+}
+
+function channelSideDom(name){
+  return t(".channel-side")([
+    t(".cs-title")(name),
+    t(".cs-new")("0")
+  ]);
+}
 
 clk(".hamburger", openSidebar);
 
@@ -47,7 +59,7 @@ function addChannel(e){
   groups[groupName].channels.push(channelName);
   lss("groups", groups);
   el(".right", pa(pa(e)))[0].appendChild(channelDom(channelName));
-  load(groupName, 1);
+  updateDom(groupName);
 }
 
 function removeChannel(e){
@@ -56,5 +68,5 @@ function removeChannel(e){
   groups[groupName].channels = groups[groupName].channels.filter(chan => chan !== channelName);
   lss("groups", groups);
   pa(pa(e)).removeChild(pa(e));
-  load(groupName, 1);
+  updateDom(groupName);
 }
