@@ -14,13 +14,12 @@ function t(tag, config){
   }
   var parent = tag ? document.createElement(tag) : document.createDocumentFragment();
   if(config){
-    var i = 0, x = Object.keys(config), j = 0;
-    while(i < x.length){
-      var key = x[i++], y = config[key];
-      if(key === "classes"){while(j < y.length) parent.classList.add(y[j++])}
-      else if(key === "click"){parent.addEventListener("click", y)}
-      else{parent[key] = y}
-    }
+    var i = 0, keys = Object.keys(config);
+    keys.forEach(key => {
+      if(key === "classes") config[key].forEach(cl => parent.classList.add(cl));
+      else if(key === "click") parent.addEventListener("click", config[key]);
+      else parent[key] = config[key];
+    });
   }
   return function(ch, force){
     parent.html = function(){
@@ -30,10 +29,10 @@ function t(tag, config){
     };
     if(force){parent.innerHTML = ch; return parent;}
     if(!ch && ch !== 0) return parent;
-    var type = Object.prototype.toString.call(ch).slice(8,-1), k = 0;
+    var type = Object.prototype.toString.call(ch).slice(8,-1);
     if(type === "String" || type === "Number") parent.textContent = ch;
     if(type.substr(0,4) === "HTML" || type.substr(0, 4) === "Docu") parent.appendChild(ch);
-    if(type === "Array") while(k<ch.length) parent.appendChild(ch[k++]);
+    if(type === "Array") ch.forEach(child => parent.appendChild(child));
     return parent;
   };
 }
@@ -49,6 +48,7 @@ function clr(e, cn){return e.classList.remove(cn);}
 function clt(e, cn){return e.classList.toggle(cn);}
 
 // Functional
+function okr(obj, fn, def){return def ? Object.keys(obj).reduce(fn, def) : Object.keys(obj).reduce(fn);}
 function jss(obj){return JSON.stringify(obj);}
 function jsp(str){return JSON.parse(str);}
 function lsod(key, def){return !ls[key] ? def : pod(ls[key]);}

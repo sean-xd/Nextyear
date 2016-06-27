@@ -18,25 +18,36 @@ var ls = localStorage, // Localstorage alias.
   gk = Object.keys(groups).sort(), // Sort groups.
   inception = Magic(gk.length, () => gk.forEach(key => draw(key))); // Wait for all groups then draw each group.
 
-  function onYouTubeIframeAPIReady(){
-    player = new YT.Player("player", { // New youtube player.
-      playerVars: {controls: 1, showinfo: 0, iv_load_policy: 3}, // Show controls, hide annotations.
-      events: {onStateChange: onPlayerStateChange, onReady: () => gk.forEach(key => load(key, inception))} // Load each group.
-    });
-  }
+function onYouTubeIframeAPIReady(){
+  player = new YT.Player("player", { // New youtube player.
+    playerVars: {controls: 1, showinfo: 0, iv_load_policy: 3}, // Show controls, hide annotations.
+    events: {onStateChange: onPlayerStateChange, onReady: () => gk.forEach(key => load(key, inception))} // Load each group.
+  });
+}
 
-  function onPlayerStateChange(e){
-    var videoId = player.getVideoData().video_id, lastVdom = el(".active")[0]; // Video id & Old active video dom.
-    if(e.data === -1 && active.playing) clr(lastVdom, "active"); // If stopped and was playing remove active.
-    if(e.data !== 1) active.playing = false; // If not playing set playing to false;
-    if(e.data === 1){ // If playing:
-      if(lastVdom && lastVdom.id === videoId) return; // If same video do nothing.
-      if(lastVdom && lastVdom.id !== videoId) clr(lastVdom, "active"); // If different video remove active.
-      if(!el("#" + videoId)) player.nextVideo(); // (If you delete a video it stays in the list until update so this will pass it.)
-      else cla(el("#" + videoId), "active"); // Add active (new video / different video).
-      active.playing = true; // Set playing to true.
-    }
+function onPlayerStateChange(e){
+  var videoId = player.getVideoData().video_id, lastVdom = el(".active")[0], // Video id & Old active video dom.
+    ch = okr(channels, (res, key) => channels[key].videos.map(e => e.id).indexOf(videoId) > -1 ? key : res, 0), // Get channel name from video id.
+    videos = channels[ch].videos.map(e => e.id), // Map list of video objects to list of video ids.
+    latestIndex = videos.indexOf(channels[ch].latest), // Most recently watched video index.
+    videoIndex = videos.indexOf(videoId); // Currently playing video index.
+  if(e.data === -1 && active.playing) clr(lastVdom, "active"); // If stopped and was playing remove active.
+  if(e.data !== 1) active.playing = false; // If not playing set playing to false;
+  if(e.data === 1){ // If playing:
+    if(videoIndex < latestIndex) updateRecent(ch, videoId, videoIndex); // Update most recently watched video.
+    if(lastVdom && lastVdom.id === videoId) return; // If same video do nothing.
+    if(lastVdom && lastVdom.id !== videoId) clr(lastVdom, "active"); // If different video remove active.
+    if(!el("#" + videoId)) player.nextVideo(); // (If you delete a video it stays in the list until update so this will pass it.)
+    else cla(el("#" + videoId), "active"); // Add active (new video / different video).
+    active.playing = true; // Set playing to true.
   }
+}
+
+function updateRecent(cn, id, index){
+  channels[cn].latest = id;
+  el(`#${cn}-new`).textContent = index;
+  lss("channels", channels);
+}
 
 function load(name, cb){ // Load group.
   var magic = Magic(groups[name].channels.length, () => { // Wait for each channel:
@@ -55,7 +66,7 @@ function getChannelVideos(cname, cb){
     hp(`${ytapi}playlistItems?key=${apikey}&playlistId=UU${channels[cname].id}&part=snippet&maxResults=24`, vdata => { // Get video data from yt api.
       channels[cname].videos = channels[cname].videos // Set channel videos:
         .concat(formatVideos(cname, vdata)) // Format and concat new videos.
-        .sort(sorter(e => e.date)); // Sort by date.
+        .sort(sorter(e => Date.now() - e.date)); // Sort by date.
       channels[cname].nextUpdate = Date.now() + (1000 * 60 * 5); // Set ttl.
       cb(); // Invoke callback.
     });

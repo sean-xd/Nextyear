@@ -6,9 +6,10 @@ function groupSideDom(name){
 }
 
 function channelSideDom(name){
+  var index = channels[name].videos.map(e => e.id).indexOf(channels[name].latest);
   return t(".channel-side")([
     t(".cs-title")(name),
-    t(".cs-new")("0")
+    t("div", {id: name + "-new", classes: ["cs-new"]})(index)
   ]);
 }
 
@@ -45,10 +46,7 @@ function addGroup(){
 function removeGroup(e){
   var id = pa(pa(e)).id;
   dom.main.removeChild(dom.sections[id]);
-  groups = Object.keys(groups).reduce((obj, key) => {
-    if(key !== id) obj[key] = groups[key];
-    return obj;
-  }, {});
+  groups = okr(groups, (obj, key) => (key !== id) ? (obj[key] = groups[key], obj) : obj, {});
   lss("groups", groups);
 }
 
