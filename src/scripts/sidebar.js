@@ -9,7 +9,10 @@ function channelSideDom(name){
   var index = channels[name].videos.map(e => e.id).indexOf(channels[name].latest);
   return t(".channel-side")([
     t(".cs-title")(name),
-    t("div", {id: name + "-new", classes: ["cs-new"]})(index)
+    t("div", {id: name + "-new", classes: ["cs-new"], click: e => {
+      var gname = el(".gs-title", pa(e))[0].textContent;
+      if(active.side === gname) removeChannel(e);
+    }})(index)
   ]);
 }
 
@@ -28,6 +31,7 @@ clk(dom.aside, e => {
 
 function gsSettings(e){
   var name = el(".gs-title", pa(e))[0].textContent;
+  active.side = active.side ? false : name;
   clt(pa(e), "gs-open");
 }
 
@@ -61,8 +65,12 @@ function addChannel(e){
 }
 
 function removeChannel(e){
-  var channelName = el(".cname", pa(e))[0].textContent,
-    groupName = pa(pa(pa(pa(e)))).id;
+  console.log("uhh");
+  var channelName = el(".cs-title", pa(e))[0].textContent,
+    groupName = el(".gs-title", pa(pa(e)))[0].textContent;
+  console.log(channelName);
+  console.log(groupName);
+  return;
   groups[groupName].channels = groups[groupName].channels.filter(chan => chan !== channelName);
   lss("groups", groups);
   pa(pa(e)).removeChild(pa(e));

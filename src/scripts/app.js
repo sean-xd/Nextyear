@@ -12,7 +12,7 @@ var ls = localStorage, // Localstorage alias.
     aside: el("aside")[0],
     drawer: el(".drawer")[0]
   },
-  active = {playing: false, group: false, theatre: false, create: false}, // Essentially all application state.
+  active = {playing: false, group: false, theatre: false, create: false, side: false}, // Essentially all application state.
   channels = lsod("channels", {}), // Get channels from ls or set to {}.
   groups = lsod("groups", {}), // Get groups from ls or set to {}.
   gk = Object.keys(groups).sort(), // Sort groups.
@@ -171,8 +171,6 @@ function banVideo(e){
 clk(dom.main, e => {
   if(clc(e, "group") && active.theatre){clt(dom.drawer, "bigger"); clt(pa(e), "bar");}
   if(clc(e, "group") && !active.theatre) toggleDrawer(e.textContent);
-  if(clc(e, "add")) addChannel(e);
-  if(clc(e, "delete")) removeChannel(e);
   if(clc(e, "video-img") || clc(e, "video-title")) toggleVideo(e);
   if(clc(e, "video-del")) banVideo(e);
   if(clc(e, "close")) toggleDrawer(pa(e).id);
